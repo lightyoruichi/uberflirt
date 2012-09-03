@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
   
   def update_received_likes(data)
-    received_likes = data
+    self.received_likes = data
     self.save
   end
   
@@ -48,8 +48,33 @@ class User < ActiveRecord::Base
       end
     end
     i_like_array = i_like_array.sort_by { |k| [k["count"]] }.reverse
-    
     return i_like_array
+  end
+  
+  def likes_me
+    #returns a ranked list of people stalking me
+    likes_me_array = []
+    if received_likes.size > 0
+      received_likes.each do |user|
+        id = user["id"].to_i
+        existing = nil
+        likes_me_array.each_with_index do |l,i|
+          existing = i if l["id"] == id
+        end      
+        if existing
+          likes_me_array[existing]["count"] = likes_me_array[existing]["count"] + 1
+        else
+          result = {}
+          result["id"] = id
+          result["user"] = {}
+          result["user"] = user
+          result["count"] = 1
+          likes_me_array << result
+        end    
+      end
+    end
+    likes_me_array = likes_me_array.sort_by { |k| [k["count"]] }.reverse
+    return likes_me_array
   end
   
 end

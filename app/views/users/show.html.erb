@@ -1,7 +1,12 @@
-<%= debug @user.received_likes %>
 <h1><%=@user.username%></h1>
+<p>In your recent uploads...</p>
+<% @user.likes_me.slice(0,19).each do |user| %>
+  <p><%= image_tag user["user"]["profile_picture"]%><br />
+  <%= user["user"]["full_name"]%> Liked you <%= pluralize(user["count"], "time")%></p>
+<% end %>
+
 <p>In your last <%=@user.likes.size%> Likes...</p>
-<% @user.i_like.each do |user| %>
+<% @user.i_like.slice(0,19).each do |user| %>
   <p><%= image_tag user["user"]["profile_picture"]%><br />
   You Liked <%= user["user"]["full_name"]%> <%= pluralize(user["count"], "time")%></p>
 <% end %>
