@@ -12,12 +12,16 @@ class User < ActiveRecord::Base
   end
   
   def update_likes(data)
-    likes_array = []
+    likes = []
     data.each do |like|
-      likes_array << like[:user]
+      likes << like[:user]
     end
-    self.likes = likes_array
     self.save
+  end
+  
+  def i_like
+    #returns a ranked list of people I'm stalking
+
   end
   
 end
