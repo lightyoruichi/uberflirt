@@ -8,6 +8,7 @@ gem 'rails', '3.2.7'
 gem 'sqlite3'
 gem 'instagram'
 gem 'thin'
+gem "friendly_id", "~> 4.0.0.beta14"
 
 # Gems used only for assets and not required
 # in production environments by default.
