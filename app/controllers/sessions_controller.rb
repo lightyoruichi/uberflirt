@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     #update basic data
     u = User.find_or_create_by_instagram_id(client.user[:id])
     u.update_instagram_data(client.user)
+    
     #grab likes
     like_data = []
     #instagram only keeps 300 likes in the api history and can return about 50 each time...
@@ -20,7 +21,16 @@ class SessionsController < ApplicationController
       like_data = like_data + l[:data]
     end
     u.update_likes(like_data)
+    
     #grab received likes
+    received_like_data = []
+    l = Instagram.user_recent_media(:access_token => session[:access_token], :count => 300)
+    l.each do |media|
+      media[:likes][:data].each do |like|
+        received_like_data << like        
+      end
+    end
+    u.update_received_likes(received_like_data)
     
     redirect_to u
   end

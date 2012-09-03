@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   friendly_id :username, :use => :slugged
   serialize :data
   serialize :likes
+  serialize :received_likes
   
   def update_instagram_data(data)
     self.username = data[:username]
@@ -16,6 +17,11 @@ class User < ActiveRecord::Base
     data.each do |like|
       self.likes << like[:user]
     end
+    self.save
+  end
+  
+  def update_received_likes(data)
+    received_likes = data
     self.save
   end
   
