@@ -1,10 +1,12 @@
 <h1><%=@user.username%></h1>
+<h2>Stalking You</h2>
 <p>In your recent uploads...</p>
 <% @user.likes_me.slice(0,19).each do |user| %>
   <p><%= image_tag user["user"]["profile_picture"]%><br />
   <%= user["user"]["full_name"]%> Liked you <%= pluralize(user["count"], "time")%></p>
 <% end %>
-
+<hr />
+<h2>You're Stalking</h2>
 <p>In your last <%=@user.likes.size%> Likes...</p>
 <% @user.i_like.slice(0,19).each do |user| %>
   <p><%= image_tag user["user"]["profile_picture"]%><br />
