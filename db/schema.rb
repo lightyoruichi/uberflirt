@@ -11,15 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903004626) do
+ActiveRecord::Schema.define(:version => 20120903060307) do
 
   create_table "users", :force => true do |t|
     t.string   "slug"
     t.string   "username"
     t.text     "data"
     t.integer  "instagram_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.text     "likes"
+    t.text     "received_likes"
   end
 
   add_index "users", ["instagram_id"], :name => "index_users_on_instagram_id"
