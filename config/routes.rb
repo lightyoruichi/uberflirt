@@ -1,4 +1,8 @@
 Uberflirt::Application.routes.draw do
+ 
+  match 'connect' => 'sessions#connect'
+  match 'sessions/callback' => 'sessions#callback'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

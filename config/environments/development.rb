@@ -34,4 +34,7 @@ Uberflirt::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.callback_url = "http://localhost:5000/sessions/callback"
+
 end
