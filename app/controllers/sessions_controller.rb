@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   
+  def home
+    
+  end
+  
   def connect
     redirect_to Instagram.authorize_url(:redirect_uri => Rails.application.config.callback_url)
   end

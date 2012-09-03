@@ -1,6 +1,7 @@
 Uberflirt::Application.routes.draw do
  
-  match 'connect' => 'sessions#connect'
+  root :to => 'sessions#home'
+  match 'connect' => 'sessions#connect', :as => :connect
   match 'sessions/callback' => 'sessions#callback'
   resources :users
   
