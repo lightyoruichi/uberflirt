@@ -13,11 +13,11 @@ class SessionsController < ApplicationController
     u.update_instagram_data(client.user)
     #grab likes
     like_data = []
-    max_id = 0
-    10.times do
-      l = Instagram.user_liked_media(:access_token => session[:access_token], :count => 500, :max_id => max_id)
-      max_id = l[:data].last[:id]
-      like_data += l[:data]
+    #instagram only keeps 300 likes in the api history and can return about 50 each time...
+    6.times do
+      l = Instagram.user_liked_media(:access_token => session[:access_token], :count => 50, :max_like_id => @max_like_id)
+      @max_like_id = l[:pagination][:next_max_like_id].to_i
+      like_data = like_data + l[:data]
     end
     u.update_likes(like_data)
     #grab received likes

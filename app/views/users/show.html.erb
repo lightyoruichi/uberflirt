@@ -1,4 +1,6 @@
-<%= debug @user %>
-
-
-<%= debug @user.i_like %>
+<h1><%=@user.username%></h1>
+<p>In your last <%=@user.likes.size%> Likes...</p>
+<% @user.i_like.each do |user| %>
+  <p><%= image_tag user["user"]["profile_picture"]%><br />
+  You Liked <%= user["user"]["full_name"]%> <%= pluralize(user["count"], "time")%></p>
+<% end %>
