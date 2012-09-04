@@ -1,16 +1,18 @@
-<h1><%=@user.username%></h1>
-<h2>Stalking You</h2>
-<p>In your recent uploads...</p>
-<% @user.likes_me.slice(0,19).each do |user| %>
-  <p><%= image_tag user["user"]["profile_picture"]%><br />
-  <%= user["user"]["full_name"]%> Liked you <%= pluralize(user["count"], "time")%></p>
+<h2><%=@user.data["username"]%></h2>
+<h3>People Stalking You In Your Recent Instagrams</h3>
+<ul class="people">
+<% @likes_me.slice(0,19).each do |user| %>
+  <li><%= image_tag user["user"]["profile_picture"]%>
+  <span class="name"><%= user["user"]["username"]%></span> Liked you <span class="count"><%=user["count"]%></span> time<%="s" if user["count"] > 1%>
+  <%= link_to "View Uberflirt Profile", user_path(user["user"]["username"]) if @profiles.find {|u| u.instagram_id == user["user"]["id"].to_i}%></li>
 <% end %>
-<hr />
-<h2>You're Stalking</h2>
-<p>In your last <%=@user.likes.size%> Likes...</p>
-<% @user.i_like.slice(0,19).each do |user| %>
-  <p><%= image_tag user["user"]["profile_picture"]%><br />
-  You Liked <%= user["user"]["full_name"]%> <%= pluralize(user["count"], "time")%></p>
+</ul>
+<div class="i_like">
+<h3>People You're Stalking In Your Recent Likes</h3>
+<ul class="people">
+<% @i_like.slice(0,19).each do |user| %>
+  <li><%= image_tag user["user"]["profile_picture"]%>
+  <span class="name"><%= user["user"]["username"]%></span> You Liked Them <span class="count"><%=user["count"]%></span> time<%="s" if user["count"] > 1%>
+  <%= link_to "View Uberflirt Profile", user_path(user["user"]["username"]) if @profiles.find {|u| u.instagram_id == user["user"]["id"].to_i}%></li>
 <% end %>
-
-<i>This is just a bit of fun by <a href="http://twitter.com/yongfook">@yongfook</a>. If you're seeing this then you've found out about Uberflirt before I've launched it officially and there's no design or anything yet!</i>
+</div>
