@@ -1,0 +1,15 @@
+@media (max-width: 500px) {
+  div.container, div.footer {
+    width: auto;
+    margin: 20px 0;
+    padding: 20px;
+  }
+  div.footer {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  div.welcome {
+    font-size: 22px !important;
+    margin-bottom: -10px;
+  }
+}
